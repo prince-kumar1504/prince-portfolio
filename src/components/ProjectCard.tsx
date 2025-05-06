@@ -14,6 +14,7 @@ interface ProjectCardProps {
   demoLink?: string;
   sourceLink?: string;
   index: number;
+  details?: string;
 }
 
 // Simplified 3D project card for thumbnail image
@@ -55,8 +56,18 @@ const ProjectCardModel = ({ imagePath }: { imagePath: string }) => {
   );
 };
 
-const ProjectCard = ({ title, description, tech, image, demoLink, sourceLink, index }: ProjectCardProps) => {
+const ProjectCard = ({ 
+  title, 
+  description, 
+  tech, 
+  image, 
+  demoLink, 
+  sourceLink, 
+  index, 
+  details 
+}: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   
   // Animate cards in sequence
   const delay = index * 200;
@@ -81,7 +92,13 @@ const ProjectCard = ({ title, description, tech, image, demoLink, sourceLink, in
         <h3 className="text-xl font-semibold mb-2 text-portfolio-tertiary">{title}</h3>
         <p className="text-gray-400 mb-4">{description}</p>
         
-        <div className="flex flex-wrap gap-2 mb-6">
+        {details && showDetails && (
+          <p className="text-gray-300 mb-4 text-sm italic">
+            {details}
+          </p>
+        )}
+        
+        <div className="flex flex-wrap gap-2 mb-4">
           {tech.map((item, idx) => (
             <span 
               key={idx} 
@@ -92,7 +109,7 @@ const ProjectCard = ({ title, description, tech, image, demoLink, sourceLink, in
           ))}
         </div>
         
-        <div className="flex gap-3 mt-auto">
+        <div className="flex gap-3 mt-auto items-center">
           {demoLink && (
             <Button 
               asChild 
@@ -116,6 +133,17 @@ const ProjectCard = ({ title, description, tech, image, demoLink, sourceLink, in
               <a href={sourceLink} target="_blank" rel="noopener noreferrer">
                 Source Code
               </a>
+            </Button>
+          )}
+          
+          {details && (
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => setShowDetails(!showDetails)} 
+              className="text-portfolio-tertiary hover:bg-portfolio-primary/10 ml-auto"
+            >
+              {showDetails ? "Less Info" : "More Info"}
             </Button>
           )}
         </div>

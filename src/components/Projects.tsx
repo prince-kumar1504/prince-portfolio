@@ -22,16 +22,17 @@ const Projects = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Project data
+  // Project data from resume
   const projects = [
     {
       title: "Insightful Writes",
       description:
-        "A responsive blog website with CRUD features. Users can write, edit, and delete blog posts, save others' posts, and track views.",
+        "A responsive blog website with CRUD features. Users can write, edit, and delete blog posts, save others' posts, and track views count on posts.",
       tech: ["React", "Node.js", "Express", "MongoDB", "JavaScript"],
-      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=600",
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=600",
       demoLink: "https://link-to-demo.com",
       sourceLink: "https://github.com/",
+      details: "Developed solo through iterative processes, integrating HTML, CSS, JavaScript, React, Node.js, Express.js, and MongoDB for a complete blog website."
     },
     {
       title: "Blood Bank Management System",
@@ -39,8 +40,9 @@ const Projects = () => {
         "A web-based system using ASP.NET Core MVC for donor registration, inventory tracking, blood donation camp management, and hospital coordination.",
       tech: ["ASP.NET Core", "MVC", "Entity Framework", "SQL Server", "Bootstrap"],
       image: "https://images.unsplash.com/photo-1615461065624-21b562ee5566?auto=format&fit=crop&q=80&w=600",
-      demoLink: "https://link-to-demo.com",
+      demoLink: "",
       sourceLink: "https://github.com/",
+      details: "Implemented donor registration, inventory tracking, blood donation camp management, and hospital coordination with responsive UI using Bootstrap and enhanced data integrity with unit testing."
     },
     {
       title: "Next Level Fitness",
@@ -48,8 +50,9 @@ const Projects = () => {
         "A single-page fitness website featuring a BMI calculator, pricing plans, FAQ section, gallery, and responsive layout showcasing gym facilities.",
       tech: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
       image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600",
-      demoLink: "https://link-to-demo.com",
+      demoLink: "",
       sourceLink: "https://github.com/",
+      details: "Designed a responsive layout with sections for pricing plans, FAQs, and a gallery showcasing the gym and its facilities. Integrated interactive elements like a BMI calculator with real-time feedback."
     },
   ];
 
@@ -73,6 +76,7 @@ const Projects = () => {
               image={project.image}
               demoLink={project.demoLink}
               sourceLink={project.sourceLink}
+              details={project.details}
             />
           ))}
         </div>
