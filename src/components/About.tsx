@@ -1,25 +1,20 @@
-
-import { useEffect, useState } from "react"
-
+import { useEffect, useState } from "react";
 const About = () => {
-  const [isVisible, setIsVisible] = useState(false)
-
+  const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
-        setIsVisible(true)
-        observer.disconnect()
+        setIsVisible(true);
+        observer.disconnect();
       }
-    }, { threshold: 0.3 })
-
-    const aboutSection = document.querySelector('#about')
-    if (aboutSection) observer.observe(aboutSection)
-
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <section id="about" className="section bg-black/20 backdrop-blur-sm">
+    }, {
+      threshold: 0.3
+    });
+    const aboutSection = document.querySelector('#about');
+    if (aboutSection) observer.observe(aboutSection);
+    return () => observer.disconnect();
+  }, []);
+  return <section id="about" className="section bg-black/20 backdrop-blur-sm">
       <div className={`max-w-4xl mx-auto transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <h2 className="text-4xl font-bold mb-6 hero-text-gradient inline-block">About Me</h2>
         
@@ -42,7 +37,7 @@ const About = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-1">
                 <h4 className="font-medium text-white">Guru Gobind Singh Indraprastha University</h4>
-                <span className="text-sm text-portfolio-primary">2020-2024</span>
+                <span className="text-sm text-portfolio-primary">2020-24</span>
               </div>
               <p className="text-gray-400">Bachelor of Technology, ECE | CGPA: 8.85, Percentage: 88.6%</p>
             </div>
@@ -50,7 +45,7 @@ const About = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-1">
                 <h4 className="font-medium text-white">Kendriya Vidyalaya Rohini Sec 8</h4>
-                <span className="text-sm text-portfolio-primary">2018-2019</span>
+                <span className="text-sm text-portfolio-primary">2018-19</span>
               </div>
               <p className="text-gray-400">Higher Secondary, Non-Medical [PCM] | Percentage: 80.2%</p>
             </div>
@@ -58,15 +53,13 @@ const About = () => {
             <div>
               <div className="flex justify-between items-center mb-1">
                 <h4 className="font-medium text-white">Kendriya Vidyalaya Shakur Basti</h4>
-                <span className="text-sm text-portfolio-primary">2016-2017</span>
+                <span className="text-sm text-portfolio-primary">2016-17</span>
               </div>
               <p className="text-gray-400">Secondary, CGPA: 9.4, Percentage: 89%</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  )
-}
-
-export default About
+    </section>;
+};
+export default About;
