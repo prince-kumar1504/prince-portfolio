@@ -20,6 +20,21 @@ interface ProjectCardProps {
 // Simplified 3D project card for thumbnail image
 const ProjectCardModel = ({ imagePath }: { imagePath: string }) => {
   const mesh = useRef<THREE.Mesh>(null);
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
+  
+  useState(() => {
+    // Load texture with error handling
+    new THREE.TextureLoader().load(
+      imagePath,
+      (loadedTexture) => {
+        setTexture(loadedTexture);
+      },
+      undefined,
+      (error) => {
+        console.error("Error loading texture:", error);
+      }
+    );
+  });
   
   useFrame((state) => {
     if (mesh.current) {
@@ -45,10 +60,7 @@ const ProjectCardModel = ({ imagePath }: { imagePath: string }) => {
           {/* Create a plane slightly in front of the box to show the image */}
           <mesh position={[0, 0, 0.06]}>
             <planeGeometry args={[1.9, 1.2]} />
-            <meshBasicMaterial map={
-              // Using imported image as texture
-              new THREE.TextureLoader().load(imagePath)
-            } />
+            <meshBasicMaterial map={texture || undefined} color={texture ? undefined : "#555"} />
           </mesh>
         </mesh>
       </Float>
@@ -68,6 +80,7 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [canvasError, setCanvasError] = useState(false);
   
   // Animate cards in sequence
   const delay = index * 200;
@@ -79,13 +92,34 @@ const ProjectCard = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="h-48">
-        <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 3.5], fov: 50 }}>
-          <ambientLight intensity={0.5} />
-          <spotLight position={[5, 5, 5]} intensity={1} castShadow />
-          <ProjectCardModel imagePath={image} />
-          <Environment preset="city" />
-        </Canvas>
+      <div className="h-48 relative">
+        {!canvasError ? (
+          <Canvas 
+            dpr={[1, 2]} 
+            camera={{ position: [0, 0, 3.5], fov: 50 }}
+            onCreated={({ gl }) => {
+              gl.setClearColor(new THREE.Color("#121212"), 1);
+            }}
+            onError={() => setCanvasError(true)}
+          >
+            <ambientLight intensity={0.5} />
+            <spotLight position={[5, 5, 5]} intensity={1} castShadow />
+            <ProjectCardModel imagePath={image} />
+            <Environment preset="city" />
+          </Canvas>
+        ) : (
+          // Fallback when Canvas fails
+          <div className="w-full h-full flex items-center justify-center bg-gray-800">
+            <img 
+              src={image} 
+              alt={title} 
+              className="max-w-full max-h-full object-cover" 
+              onError={(e) => {
+                e.currentTarget.src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600';
+              }}
+            />
+          </div>
+        )}
       </div>
       
       <div className="p-6">

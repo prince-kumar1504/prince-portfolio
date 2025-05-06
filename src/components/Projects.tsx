@@ -1,9 +1,11 @@
 
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [renderAttempt, setRenderAttempt] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,6 +23,18 @@ const Projects = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Try re-rendering if there was an issue
+  useEffect(() => {
+    // If section is visible but projects might not be showing properly
+    if (isVisible && renderAttempt === 0) {
+      // Wait a bit and force a re-render by incrementing renderAttempt
+      const timer = setTimeout(() => {
+        setRenderAttempt(1);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, renderAttempt]);
 
   // Project data from resume
   const projects = [
