@@ -1,29 +1,23 @@
-
-import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react"
-import { Github, Linkedin, Mail, Phone } from "lucide-react"
-
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { Github, Linkedin, Mail, Phone } from "lucide-react";
 const Hero = () => {
-  const [mounted, setMounted] = useState(false)
-
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
+    setMounted(true);
+  }, []);
   const scrollToContact = () => {
-    const contactSection = document.getElementById('contact')
+    const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' })
+      contactSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
-  }
-
-  return (
-    <section id="hero" className="section flex items-center relative">
+  };
+  return <section id="hero" className="section flex items-center relative">
       <div className={`max-w-4xl mx-auto mt-16 transition-opacity duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
         <p className="text-portfolio-primary text-xl font-semibold mb-2">Hello, I'm</p>
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 hero-text-gradient leading-tight">
-          Prince Vasudev
-        </h1>
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 hero-text-gradient leading-tight">Prince </h1>
         <h2 className="text-2xl md:text-3xl text-gray-300 mb-8">
           Associate Software Engineer
         </h2>
@@ -33,21 +27,11 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-wrap gap-4 mb-12">
-          <Button 
-            variant="default" 
-            size="lg" 
-            onClick={scrollToContact} 
-            className="bg-portfolio-primary hover:bg-portfolio-secondary text-white"
-          >
+          <Button variant="default" size="lg" onClick={scrollToContact} className="bg-portfolio-primary hover:bg-portfolio-secondary text-white">
             Contact Me
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="lg" 
-            asChild
-            className="border-portfolio-primary text-portfolio-primary hover:bg-portfolio-primary/10"
-          >
+          <Button variant="outline" size="lg" asChild className="border-portfolio-primary text-portfolio-primary hover:bg-portfolio-primary/10">
             <a href="#projects">View Projects</a>
           </Button>
         </div>
@@ -67,8 +51,6 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </section>
-  )
-}
-
-export default Hero
+    </section>;
+};
+export default Hero;
