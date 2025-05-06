@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Canvas } from "@react-three/fiber";
 import { Environment, Float, PresentationControls } from "@react-three/drei";
+import * as THREE from "three";
 
 interface ProjectCardProps {
   title: string;
