@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Canvas } from "@react-three/fiber";
 import { Environment, Float, PresentationControls } from "@react-three/drei";
@@ -22,7 +22,7 @@ const ProjectCardModel = ({ imagePath }: { imagePath: string }) => {
   const mesh = useRef<THREE.Mesh>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
   
-  useState(() => {
+  useEffect(() => {
     // Load texture with error handling
     new THREE.TextureLoader().load(
       imagePath,
@@ -34,7 +34,13 @@ const ProjectCardModel = ({ imagePath }: { imagePath: string }) => {
         console.error("Error loading texture:", error);
       }
     );
-  });
+    
+    return () => {
+      if (texture) {
+        texture.dispose();
+      }
+    };
+  }, [imagePath]);
   
   useFrame((state) => {
     if (mesh.current) {
@@ -81,18 +87,29 @@ const ProjectCard = ({
   const [isHovered, setIsHovered] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [canvasError, setCanvasError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   
-  // Animate cards in sequence
-  const delay = index * 200;
+  // After component mounts, mark as loaded for animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100); // Small delay to ensure DOM is ready
+    return () => clearTimeout(timer);
+  }, []);
+  
+  // Animate cards in sequence with a smaller delay
+  const delay = index * 100;
 
   return (
     <div 
-      className={`card-hover bg-portfolio-dark/40 rounded-xl overflow-hidden border border-portfolio-secondary/20 transition-all opacity-0 translate-y-10`}
-      style={{ animationDelay: `${delay}ms`, animationFillMode: 'forwards', animation: 'fade-in 0.6s ease-out forwards' }}
+      className={`card-hover bg-portfolio-dark/40 rounded-xl overflow-hidden border border-portfolio-secondary/20 transition-all duration-300 ${
+        isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="h-48 relative">
+      <div className="h-48 relative bg-gray-800">
         {!canvasError ? (
           <Canvas 
             dpr={[1, 2]} 
@@ -100,7 +117,11 @@ const ProjectCard = ({
             onCreated={({ gl }) => {
               gl.setClearColor(new THREE.Color("#121212"), 1);
             }}
-            onError={() => setCanvasError(true)}
+            onError={(e) => {
+              console.error("Canvas error:", e);
+              setCanvasError(true);
+            }}
+            style={{ touchAction: 'none' }} // Fix for touch action warning
           >
             <ambientLight intensity={0.5} />
             <spotLight position={[5, 5, 5]} intensity={1} castShadow />
@@ -109,7 +130,7 @@ const ProjectCard = ({
           </Canvas>
         ) : (
           // Fallback when Canvas fails
-          <div className="w-full h-full flex items-center justify-center bg-gray-800">
+          <div className="w-full h-full flex items-center justify-center">
             <img 
               src={image} 
               alt={title} 

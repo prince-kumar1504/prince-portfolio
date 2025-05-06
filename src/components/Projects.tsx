@@ -15,7 +15,7 @@ const Projects = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 } // Lower threshold for earlier detection
     );
 
     const projectsSection = document.querySelector("#projects");
@@ -27,10 +27,11 @@ const Projects = () => {
   // Try re-rendering if there was an issue
   useEffect(() => {
     // If section is visible but projects might not be showing properly
-    if (isVisible && renderAttempt === 0) {
+    if (isVisible && renderAttempt < 2) {
       // Wait a bit and force a re-render by incrementing renderAttempt
       const timer = setTimeout(() => {
-        setRenderAttempt(1);
+        setRenderAttempt(prev => prev + 1);
+        console.log("Re-rendering projects attempt:", renderAttempt + 1);
       }, 500);
       return () => clearTimeout(timer);
     }
@@ -44,8 +45,8 @@ const Projects = () => {
         "A responsive blog website with CRUD features. Users can write, edit, and delete blog posts, save others' posts, and track views count on posts.",
       tech: ["React", "Node.js", "Express", "MongoDB", "JavaScript"],
       image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=600",
-      demoLink: "https://link-to-demo.com",
-      sourceLink: "https://github.com/",
+      demoLink: "https://prince-kumar1504.github.io/BlogApp_frontend/",
+      sourceLink: "https://github.com/prince-kumar1504/BlogApp_frontend",
       details: "Developed solo through iterative processes, integrating HTML, CSS, JavaScript, React, Node.js, Express.js, and MongoDB for a complete blog website."
     },
     {
@@ -55,7 +56,7 @@ const Projects = () => {
       tech: ["ASP.NET Core", "MVC", "Entity Framework", "SQL Server", "Bootstrap"],
       image: "https://images.unsplash.com/photo-1615461065624-21b562ee5566?auto=format&fit=crop&q=80&w=600",
       demoLink: "",
-      sourceLink: "https://github.com/",
+      sourceLink: "https://github.com/prince-kumar1504/BloodBankManagementSystem",
       details: "Implemented donor registration, inventory tracking, blood donation camp management, and hospital coordination with responsive UI using Bootstrap and enhanced data integrity with unit testing."
     },
     {
@@ -65,7 +66,7 @@ const Projects = () => {
       tech: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
       image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600",
       demoLink: "",
-      sourceLink: "https://github.com/",
+      sourceLink: "https://github.com/prince-kumar1504/Next_level_fitness",
       details: "Designed a responsive layout with sections for pricing plans, FAQs, and a gallery showcasing the gym and its facilities. Integrated interactive elements like a BMI calculator with real-time feedback."
     },
   ];
@@ -78,7 +79,7 @@ const Projects = () => {
         }`}
       >
         <h2 className="text-4xl font-bold mb-12 hero-text-gradient inline-block">Projects</h2>
-
+        
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <ProjectCard
