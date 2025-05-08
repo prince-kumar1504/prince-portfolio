@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -69,7 +68,7 @@ const About = () => {
             <div className="mb-8">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xl font-semibold text-white">Associate Software Engineer</h3>
-                <span className="text-sm text-portfolio-primary">Jan 2023 - Present</span>
+                <span className="text-sm text-portfolio-primary">Sep 2024 - Present</span>
               </div>
               <h4 className="text-portfolio-tertiary mb-3">Tech Mahindra Ltd</h4>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
@@ -83,7 +82,7 @@ const About = () => {
             <div>
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xl font-semibold text-white">Software Development Intern</h3>
-                <span className="text-sm text-portfolio-primary">May 2022 - Dec 2022</span>
+                <span className="text-sm text-portfolio-primary">Oct 2022 - June 2023</span>
               </div>
               <h4 className="text-portfolio-tertiary mb-3">Good Good Piggy by Finkids Technologies Ltd</h4>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
