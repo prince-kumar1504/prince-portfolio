@@ -1,4 +1,3 @@
-
 import Scene from "@/components/Scene";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -126,7 +125,7 @@ const Index = () => {
       <footer className="bg-portfolio-dark/80 backdrop-blur-sm py-8 border-t border-portfolio-secondary/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Prince Vasudev. All rights reserved.
+            &copy; {new Date().getFullYear()} Prince. All rights reserved.
           </p>
         </div>
       </footer>
