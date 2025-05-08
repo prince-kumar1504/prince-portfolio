@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import { Card, CardContent } from "@/components/ui/card";
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,14 +36,14 @@ const Projects = () => {
     }
   }, [isVisible, renderAttempt]);
 
-  // Project data from resume
+  // Project data from resume with updated image paths
   const projects = [
     {
       title: "Insightful Writes",
       description:
         "A responsive blog website with CRUD features. Users can write, edit, and delete blog posts, save others' posts, and track views count on posts.",
       tech: ["React", "Node.js", "Express", "MongoDB", "JavaScript"],
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=600",
+      image: "/lovable-uploads/06afbc44-a9de-4462-8b81-5af0cd4c070b.png", // Blog image
       demoLink: "https://prince-kumar1504.github.io/BlogApp_frontend/",
       sourceLink: "https://github.com/prince-kumar1504/BlogApp_frontend",
       details: "Developed solo through iterative processes, integrating HTML, CSS, JavaScript, React, Node.js, Express.js, and MongoDB for a complete blog website."
@@ -54,7 +53,7 @@ const Projects = () => {
       description:
         "A web-based system using ASP.NET Core MVC for donor registration, inventory tracking, blood donation camp management, and hospital coordination.",
       tech: ["ASP.NET Core", "MVC", "Entity Framework", "SQL Server", "Bootstrap"],
-      image: "https://images.unsplash.com/photo-1615461065624-21b562ee5566?auto=format&fit=crop&q=80&w=600",
+      image: "/lovable-uploads/daa79dfb-1f12-400f-a0ed-5444d40787fe.png", // Blood bank image
       demoLink: "",
       sourceLink: "https://github.com/prince-kumar1504/BloodBankManagementSystem",
       details: "Implemented donor registration, inventory tracking, blood donation camp management, and hospital coordination with responsive UI using Bootstrap and enhanced data integrity with unit testing."
@@ -64,7 +63,7 @@ const Projects = () => {
       description:
         "A single-page fitness website featuring a BMI calculator, pricing plans, FAQ section, gallery, and responsive layout showcasing gym facilities.",
       tech: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
-      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600",
+      image: "/lovable-uploads/90463e90-b2e1-495f-a556-34c0a43a910f.png", // Fitness image
       demoLink: "",
       sourceLink: "https://github.com/prince-kumar1504/Next_level_fitness",
       details: "Designed a responsive layout with sections for pricing plans, FAQs, and a gallery showcasing the gym and its facilities. Integrated interactive elements like a BMI calculator with real-time feedback."

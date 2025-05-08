@@ -21,17 +21,42 @@ interface ProjectCardProps {
 const ProjectCardModel = ({ imagePath }: { imagePath: string }) => {
   const mesh = useRef<THREE.Mesh>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
+  const [textureLoaded, setTextureLoaded] = useState(false);
+  const [textureError, setTextureError] = useState(false);
   
   useEffect(() => {
-    // Load texture with error handling
-    new THREE.TextureLoader().load(
+    const loader = new THREE.TextureLoader();
+    
+    // Create a fallback texture (simple colored material)
+    const createFallbackTexture = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 256;
+      canvas.height = 256;
+      const context = canvas.getContext('2d');
+      if (context) {
+        context.fillStyle = '#333';
+        context.fillRect(0, 0, 256, 256);
+        context.fillStyle = '#555';
+        context.font = '24px Arial';
+        context.textAlign = 'center';
+        context.fillText('Image Error', 128, 128);
+      }
+      return new THREE.CanvasTexture(canvas);
+    };
+    
+    // Load texture with comprehensive error handling
+    loader.load(
       imagePath,
       (loadedTexture) => {
         setTexture(loadedTexture);
+        setTextureLoaded(true);
+        console.log("Texture loaded successfully:", imagePath);
       },
       undefined,
       (error) => {
-        console.error("Error loading texture:", error);
+        console.error("Error loading texture:", error, imagePath);
+        setTextureError(true);
+        setTexture(createFallbackTexture());
       }
     );
     
@@ -93,32 +118,30 @@ const ProjectCard = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
-    }, 100); // Small delay to ensure DOM is ready
+    }, 100 + index * 50); // Small delay to ensure DOM is ready, staggered by index
     return () => clearTimeout(timer);
-  }, []);
+  }, [index]);
   
-  // Animate cards in sequence with a smaller delay
-  const delay = index * 100;
-
   return (
     <div 
-      className={`card-hover bg-portfolio-dark/40 rounded-xl overflow-hidden border border-portfolio-secondary/20 transition-all duration-300 ${
+      className={`card-hover bg-portfolio-dark/40 rounded-xl overflow-hidden border border-portfolio-secondary/20 transition-all duration-500 ${
         isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${index * 100}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="h-48 relative bg-gray-800">
+      <div className="h-48 relative bg-gray-800 overflow-hidden">
         {!canvasError ? (
           <Canvas 
             dpr={[1, 2]} 
             camera={{ position: [0, 0, 3.5], fov: 50 }}
             onCreated={({ gl }) => {
               gl.setClearColor(new THREE.Color("#121212"), 1);
+              console.log("Canvas created successfully for project:", title);
             }}
             onError={(e) => {
-              console.error("Canvas error:", e);
+              console.error("Canvas error for project:", title, e);
               setCanvasError(true);
             }}
             style={{ touchAction: 'none' }} // Fix for touch action warning
@@ -134,8 +157,9 @@ const ProjectCard = ({
             <img 
               src={image} 
               alt={title} 
-              className="max-w-full max-h-full object-cover" 
+              className="w-full h-full object-cover" 
               onError={(e) => {
+                console.error("Fallback image error:", title);
                 e.currentTarget.src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600';
               }}
             />
