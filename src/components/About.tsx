@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -56,6 +57,41 @@ const About = () => {
                 <span className="text-sm text-portfolio-primary">2016-17</span>
               </div>
               <p className="text-gray-400">Secondary, CGPA: 9.4, Percentage: 89%</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Work Experience Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-6 hero-text-gradient inline-block">Work Experience</h2>
+          
+          <div className="bg-portfolio-dark/40 rounded-xl p-6 border border-portfolio-secondary/20">
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-xl font-semibold text-white">Associate Software Engineer</h3>
+                <span className="text-sm text-portfolio-primary">Jan 2023 - Present</span>
+              </div>
+              <h4 className="text-portfolio-tertiary mb-3">Tech Mahindra Ltd</h4>
+              <ul className="list-disc list-inside text-gray-300 space-y-2">
+                <li>Develop and maintain web applications using ASP.NET, C#, and SQL Server</li>
+                <li>Collaborate with cross-functional teams to implement new features and fix bugs</li>
+                <li>Participate in code reviews and contribute to improving development practices</li>
+                <li>Work with clients to understand requirements and provide technical solutions</li>
+              </ul>
+            </div>
+            
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-xl font-semibold text-white">Software Development Intern</h3>
+                <span className="text-sm text-portfolio-primary">May 2022 - Dec 2022</span>
+              </div>
+              <h4 className="text-portfolio-tertiary mb-3">Good Good Piggy by Finkids Technologies Ltd</h4>
+              <ul className="list-disc list-inside text-gray-300 space-y-2">
+                <li>Developed admin panel pages using React.js and Material UI</li>
+                <li>Fixed hundreds of bugs across web and mobile platforms</li>
+                <li>Improved user experience by optimizing application performance</li>
+                <li>Collaborated with designers and product managers to implement new features</li>
+              </ul>
             </div>
           </div>
         </div>
