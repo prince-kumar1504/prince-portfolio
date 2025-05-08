@@ -43,7 +43,7 @@ const Projects = () => {
       description:
         "A responsive blog website with CRUD features. Users can write, edit, and delete blog posts, save others' posts, and track views count on posts.",
       tech: ["React", "Node.js", "Express", "MongoDB", "JavaScript"],
-      image: "/lovable-uploads/06afbc44-a9de-4462-8b81-5af0cd4c070b.png", // Blog image
+      image: "/lovable-uploads/06afbc44-a9de-4462-8b81-5af0cd4c070b.png",
       demoLink: "https://prince-kumar1504.github.io/BlogApp_frontend/",
       sourceLink: "https://github.com/prince-kumar1504/BlogApp_frontend",
       details: "Developed solo through iterative processes, integrating HTML, CSS, JavaScript, React, Node.js, Express.js, and MongoDB for a complete blog website."
@@ -53,7 +53,7 @@ const Projects = () => {
       description:
         "A web-based system using ASP.NET Core MVC for donor registration, inventory tracking, blood donation camp management, and hospital coordination.",
       tech: ["ASP.NET Core", "MVC", "Entity Framework", "SQL Server", "Bootstrap"],
-      image: "/lovable-uploads/daa79dfb-1f12-400f-a0ed-5444d40787fe.png", // Blood bank image
+      image: "/lovable-uploads/daa79dfb-1f12-400f-a0ed-5444d40787fe.png",
       demoLink: "",
       sourceLink: "https://github.com/prince-kumar1504/BloodBankManagementSystem",
       details: "Implemented donor registration, inventory tracking, blood donation camp management, and hospital coordination with responsive UI using Bootstrap and enhanced data integrity with unit testing."
@@ -63,7 +63,7 @@ const Projects = () => {
       description:
         "A single-page fitness website featuring a BMI calculator, pricing plans, FAQ section, gallery, and responsive layout showcasing gym facilities.",
       tech: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
-      image: "/lovable-uploads/90463e90-b2e1-495f-a556-34c0a43a910f.png", // Fitness image
+      image: "/lovable-uploads/90463e90-b2e1-495f-a556-34c0a43a910f.png",
       demoLink: "",
       sourceLink: "https://github.com/prince-kumar1504/Next_level_fitness",
       details: "Designed a responsive layout with sections for pricing plans, FAQs, and a gallery showcasing the gym and its facilities. Integrated interactive elements like a BMI calculator with real-time feedback."
@@ -87,7 +87,7 @@ const Projects = () => {
               title={project.title}
               description={project.description}
               tech={project.tech}
-              image={project.image}
+              image={project.image} // We still pass this even though we don't use it to avoid prop errors
               demoLink={project.demoLink}
               sourceLink={project.sourceLink}
               details={project.details}
