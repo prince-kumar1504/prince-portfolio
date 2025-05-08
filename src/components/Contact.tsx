@@ -63,7 +63,7 @@ const Contact = () => {
             </h3>
             <div className="flex space-x-6 justify-center">
               <a
-                href="https://github.com/"
+                href="https://github.com/prince-kumar1504"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-portfolio-dark/40 p-4 rounded-full border border-portfolio-secondary/20 text-gray-300 hover:text-portfolio-primary hover:border-portfolio-primary transition-colors"
@@ -71,7 +71,7 @@ const Contact = () => {
                 <Github size={28} />
               </a>
               <a
-                href="https://linkedin.com/"
+                href="https://www.linkedin.com/in/prince-2a466a216/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-portfolio-dark/40 p-4 rounded-full border border-portfolio-secondary/20 text-gray-300 hover:text-portfolio-primary hover:border-portfolio-primary transition-colors"

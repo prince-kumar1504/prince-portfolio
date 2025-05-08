@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
@@ -37,10 +38,10 @@ const Hero = () => {
         </div>
 
         <div className="flex space-x-4">
-          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-primary transition-colors">
+          <a href="https://github.com/prince-kumar1504" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-primary transition-colors">
             <Github size={24} />
           </a>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-primary transition-colors">
+          <a href="https://www.linkedin.com/in/prince-2a466a216/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-primary transition-colors">
             <Linkedin size={24} />
           </a>
           <a href="mailto:princevasudev15@gmail.com" className="text-gray-400 hover:text-portfolio-primary transition-colors">
